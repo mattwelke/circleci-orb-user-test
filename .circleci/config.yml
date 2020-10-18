@@ -12,7 +12,8 @@ jobs:
           name: Do something before using the orb
           command: |
             echo "Here we go... about to use the orb..."
-      - circleci-orb-test/greet
+      - circleci-orb-test/greet:
+          subject: CircleCI
       - run:
           name: Do something after using the orb
           command: |
