@@ -3,17 +3,22 @@ version: 2.1
 orbs:
   circleci-orb-test: mattwelke/circleci-orb-test@0.0.1
 
+jobs:
+  test-orb:
+    docker:
+      - image: cimg/base:stable
+    steps:
+      - run:
+          name: Do something before using the orb
+          command: |
+            echo "Here we go... about to use the orb..."
+      - circleci-orb-test/greet
+      - run:
+          name: Do something after using the orb
+          command: |
+            echo "Hopefully that worked!"
+
 workflows:
-  main:
+  test-orb:
     jobs:
-      - test-orb:
-          steps:
-            - run:
-                name: Do something before using the orb
-                command: |
-                  echo "Here we go... about to use the orb..."
-            - circleci-orb-test/greet
-            - run:
-                name: Do something after using the orb
-                command: |
-                  echo "Hopefully that worked!"
+      - test-orb
