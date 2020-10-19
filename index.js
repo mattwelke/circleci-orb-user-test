@@ -29,16 +29,20 @@ async function waitMs(ms) {
 
     let receivedExpected = false;
 
-    sub.addListener(rawMsg => {
+    const msgHandler = rawMsg => {
         const msg = Buffer.from(rawMsg, 'base64');
         if (msg === testMsg) {
             receivedExpected = true;
         }
-    });
+    };
+
+    sub.on('message', msgHandler);
 
     await topic.publish(Buffer.from(testMsg));
 
     await waitMs(2000);
+
+    sub.removeListener('message', msgHandler);
 
     if (!receivedExpected) {
         throw new Error('test failed because did not receive expected message from test subscription');
