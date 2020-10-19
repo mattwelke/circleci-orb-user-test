@@ -1,7 +1,7 @@
 version: 2.1
 
 orbs:
-  circleci-orb-test: mattwelke/circleci-orb-test@0.0.7
+  circleci-orb-test: mattwelke/circleci-orb-test@0.0.8
 
 jobs:
   test-orb:
@@ -33,18 +33,23 @@ jobs:
           subject: CircleCI
       - setup_remote_docker:
             docker_layer_caching: false
-      - run:
-          name: Auth with Docker Hub
-          command: |
-            echo $DOCKER_HUB_PASSWORD | docker login --username $DOCKER_HUB_ID --password-stdin
-      - run:
-          name: Build app
-          command: |
-            docker build -t $DOCKER_HUB_ID/circleci-orb-user-test:<< pipeline.git.revision >> .
-      - run:
-          name: Push build
-          command: |
-            docker push $DOCKER_HUB_ID/circleci-orb-user-test:<< pipeline.git.revision >>
+      - circleci-orb-test/build-and-push-docker:
+          docker-hub-id: DOCKER_HUB_ID
+          docker-hub-password: DOCKER_HUB_PASSWORD
+          repo: circleci-orb-user-test
+          tag: << pipeline.git.revision >>
+      # - run:
+      #     name: Auth with Docker Hub
+      #     command: |
+      #       echo $DOCKER_HUB_PASSWORD | docker login --username $DOCKER_HUB_ID --password-stdin
+      # - run:
+      #     name: Build app
+      #     command: |
+      #       docker build -t $DOCKER_HUB_ID/circleci-orb-user-test:<< pipeline.git.revision >> .
+      # - run:
+      #     name: Push build
+      #     command: |
+      #       docker push $DOCKER_HUB_ID/circleci-orb-user-test:<< pipeline.git.revision >>
 
 workflows:
   test-orb:
