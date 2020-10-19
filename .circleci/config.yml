@@ -6,7 +6,10 @@ orbs:
 jobs:
   test-orb:
     docker:
-      - image: cimg/base:stable
+      - image: cimg/node:14.14.0
+        auth:
+          username: $DOCKER_HUB_ID
+          password: $DOCKER_HUB_PASSWORD
 
     steps:
       - run:
