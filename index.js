@@ -9,7 +9,7 @@ async function waitMs(ms) {
     });
 };
 
-(async () => {
+async function main() {
     // Setup:
     const pubSubClient = new PubSub();
     console.log(`Created Pub/Sub client.`);
@@ -50,4 +50,9 @@ async function waitMs(ms) {
     if (!receivedExpected) {
         throw new Error('test failed because did not receive expected message from test subscription');
     }
-})();
+}
+
+main().catch(e => {
+    console.log(`Error:`, e);
+    process.exit(1);
+});
