@@ -32,10 +32,14 @@ jobs:
       - circleci-orb-test/greet:
           subject: CircleCI
       - run:
-          name: Do something after using the orb
+          name: Build app
           command: |
-            echo "Hopefully that worked!"
-
+            docker build -t $DOCKER_HUB_ID/circleci-orb-user-test:<< pipeline.git.revision >> .
+      - run:
+          name: Push build
+          command: |
+            docker push $DOCKER_HUB_ID/circleci-orb-user-test:<< pipeline.git.revision >>
+            
 workflows:
   test-orb:
     jobs:

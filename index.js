@@ -10,7 +10,7 @@ async function waitMs(ms) {
 };
 
 async function main() {
-    // Setup:
+    // Arrange:
     const pubSubClient = new PubSub();
     console.log(`Created Pub/Sub client.`);
 
@@ -23,12 +23,8 @@ async function main() {
     console.log(`Subscription ${subName} to topic ${topicName} created.`);
 
     const sub = pubSubClient.subscription(subName);
-
-    // Test:
     const testMsg = 'test-message';
-
     let receivedExpected = false;
-
     const msgHandler = rawMsg => {
         console.log(`Subscription received message.`);
         const msg = Buffer.from(rawMsg.data, 'base64').toString();
@@ -39,6 +35,7 @@ async function main() {
         rawMsg.ack();
     };
 
+    // Act
     sub.on('message', msgHandler);
     console.log(`Subscription "${subName}" listening.`);
 
