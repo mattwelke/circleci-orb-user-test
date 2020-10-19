@@ -12,6 +12,9 @@ jobs:
           username: $DOCKER_HUB_ID
           password: $DOCKER_HUB_PASSWORD
       - image: google/cloud-sdk:314.0.0
+        auth:
+          username: $DOCKER_HUB_ID
+          password: $DOCKER_HUB_PASSWORD
 
     steps:
       - checkout
