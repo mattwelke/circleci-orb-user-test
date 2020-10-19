@@ -30,10 +30,13 @@ async function waitMs(ms) {
     let receivedExpected = false;
 
     const msgHandler = rawMsg => {
+        console.log(`Subscription received message.`);
         const msg = Buffer.from(rawMsg, 'base64');
+        console.log(`Decoded message: ${msg}`);
         if (msg === testMsg) {
             receivedExpected = true;
         }
+        rawMsg.ack();
     };
 
     sub.on('message', msgHandler);
