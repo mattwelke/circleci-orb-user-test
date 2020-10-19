@@ -30,7 +30,7 @@ async function main() {
     let receivedExpected = false;
 
     const msgHandler = rawMsg => {
-        console.log(`Subscription received raw message:`, rawMsg);
+        console.log(`Subscription received message.`);
         const msg = Buffer.from(rawMsg.data, 'base64');
         console.log(`Decoded message: ${msg}`);
         if (msg === testMsg) {
@@ -40,17 +40,17 @@ async function main() {
     };
 
     sub.on('message', msgHandler);
-    console.log(`Started subscription ${subName} listening.`);
+    console.log(`Subscription "${subName}" listening.`);
 
     await topic.publish(Buffer.from(testMsg));
-    console.log(`Published message ${testMsg} on topic ${topicName}.`);
+    console.log(`Published message "${testMsg}" to topic "${topicName}".`);
 
     console.log(`Begin waiting 2 seconds.`);
     await waitMs(2000);
     console.log(`Finished waiting two seconds.`);
 
     sub.removeListener('message', msgHandler);
-    console.log(`Stopped subscription ${subName} listening.`);
+    console.log(`Stopped subscription "${subName}" listening.`);
 
     if (!receivedExpected) {
         throw new Error('test failed because did not receive expected message from test subscription');
