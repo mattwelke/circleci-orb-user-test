@@ -5,23 +5,28 @@ orbs:
 
 jobs:
   test-orb:
-    resource_class: small
+    environment:
+      PUBSUB_EMULATOR_HOST: localhost:8538
+
     docker:
       - image: cimg/node:14.14.0
         auth:
           username: $DOCKER_HUB_ID
           password: $DOCKER_HUB_PASSWORD
       - image: google/cloud-sdk:314.0.0
+        command: beta emulators pubsub start
         auth:
           username: $DOCKER_HUB_ID
           password: $DOCKER_HUB_PASSWORD
 
+    resource_class: small
+
     steps:
       - checkout
       - run:
-          name: Do something before using the orb
+          name: Run Node.js test before using the orb
           command: |
-            node index.js
+            npm test
       - circleci-orb-test/greet:
           subject: CircleCI
       - run:

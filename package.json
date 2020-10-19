@@ -1,0 +1,23 @@
+{
+  "name": "circleci-orb-user-test",
+  "version": "1.0.0",
+  "description": "A sandbox to try out various CircleCI concepts:",
+  "main": "index.js",
+  "scripts": {
+    "test": "node index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/mattwelke/circleci-orb-user-test.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/mattwelke/circleci-orb-user-test/issues"
+  },
+  "homepage": "https://github.com/mattwelke/circleci-orb-user-test#readme",
+  "dependencies": {
+    "@google-cloud/pubsub": "^2.5.0"
+  }
+}
