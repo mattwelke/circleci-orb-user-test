@@ -7,8 +7,6 @@ jobs:
   test-orb:
     executor:
       name: circleci-orb-test/default
-      docker-hub-id: DOCKER_HUB_ID_MY_APP
-      docker-hub-password: DOCKER_HUB_PASSWORD_MY_APP
 
     steps:
       - run:
