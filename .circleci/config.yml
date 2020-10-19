@@ -6,8 +6,8 @@ orbs:
 jobs:
   test-orb:
     environment:
-      PUBSUB_EMULATOR_HOST: localhost:8538
-      PUBSUB_EMULATOR_PROJECT: test-project
+      PUBSUB_EMULATOR_HOST: localhost:8085
+      GOOGLE_CLOUD_PROJECT: test-project
 
     docker:
       - image: cimg/node:14.14.0
