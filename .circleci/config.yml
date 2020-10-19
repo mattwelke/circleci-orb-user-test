@@ -10,12 +10,13 @@ jobs:
         auth:
           username: $DOCKER_HUB_ID
           password: $DOCKER_HUB_PASSWORD
+      - image: google/cloud-sdk
 
     steps:
       - run:
           name: Do something before using the orb
           command: |
-            echo "Here we go... about to use the orb..."
+            node index.js
       - circleci-orb-test/greet:
           subject: CircleCI
       - run:
