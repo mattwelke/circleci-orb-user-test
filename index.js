@@ -31,7 +31,7 @@ async function main() {
 
     const msgHandler = rawMsg => {
         console.log(`Subscription received message.`);
-        const msg = Buffer.from(rawMsg.data, 'base64');
+        const msg = Buffer.from(rawMsg.data, 'base64').toString();
         console.log(`Decoded message: ${msg}`);
         if (msg === testMsg) {
             receivedExpected = true;
