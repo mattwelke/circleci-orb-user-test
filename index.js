@@ -40,12 +40,17 @@ async function main() {
     };
 
     sub.on('message', msgHandler);
+    console.log(`Started subscription ${subName} listening.`);
 
     await topic.publish(Buffer.from(testMsg));
+    console.log(`Published message ${testMsg} on topic ${topicName}.`);
 
+    console.log(`Begin waiting 2 seconds.`);
     await waitMs(2000);
+    console.log(`Finished waiting two seconds.`);
 
     sub.removeListener('message', msgHandler);
+    console.log(`Stopped subscription ${subName} listening.`);
 
     if (!receivedExpected) {
         throw new Error('test failed because did not receive expected message from test subscription');
