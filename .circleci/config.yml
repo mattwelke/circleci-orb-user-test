@@ -5,7 +5,11 @@ orbs:
 
 jobs:
   test-orb:
-    executor: circleci-orb-test/default
+    executor:
+      name: default
+      docker-hub-username: DOCKER_HUB_USERNAME_MY_APP
+      docker-hub-password: DOCKER_HUB_PASSWORD_MY_APP
+
     steps:
       - run:
           name: Do something before using the orb
