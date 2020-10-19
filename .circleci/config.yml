@@ -15,7 +15,7 @@ jobs:
           username: $DOCKER_HUB_ID
           password: $DOCKER_HUB_PASSWORD
       - image: google/cloud-sdk:313.0.0
-        command: gcloud beta emulators pubsub start --project=$PUBSUB_EMULATOR_PROJECT
+        command: gcloud beta emulators pubsub start --project=test-project
         auth:
           username: $DOCKER_HUB_ID
           password: $DOCKER_HUB_PASSWORD
