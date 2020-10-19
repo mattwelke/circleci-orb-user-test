@@ -5,6 +5,7 @@ orbs:
 
 jobs:
   test-orb:
+    resource_class: small
     docker:
       - image: cimg/node:14.14.0
         auth:
@@ -13,6 +14,7 @@ jobs:
       - image: google/cloud-sdk
 
     steps:
+      - checkout
       - run:
           name: Do something before using the orb
           command: |
