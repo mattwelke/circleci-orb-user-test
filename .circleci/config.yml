@@ -5,8 +5,8 @@ orbs:
 
 jobs:
   test-orb:
-    executor:
-      name: circleci-orb-test/default
+    docker:
+      - image: cimg/base:stable
 
     steps:
       - run:
