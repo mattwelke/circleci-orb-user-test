@@ -31,6 +31,8 @@ jobs:
             npm test
       - circleci-orb-test/greet:
           subject: CircleCI
+      - setup_remote_docker:
+            docker_layer_caching: false
       - run:
           name: Build app
           command: |
@@ -39,7 +41,7 @@ jobs:
           name: Push build
           command: |
             docker push $DOCKER_HUB_ID/circleci-orb-user-test:<< pipeline.git.revision >>
-            
+
 workflows:
   test-orb:
     jobs:
