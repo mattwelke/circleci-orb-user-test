@@ -24,6 +24,8 @@ jobs:
     steps:
       - checkout
       - run:
+          npm ci
+      - run:
           name: Run Node.js test before using the orb
           command: |
             npm test
