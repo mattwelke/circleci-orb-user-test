@@ -1,7 +1,7 @@
 version: 2.1
 
 orbs:
-  circleci-orb-test: mattwelke/circleci-orb-test@0.0.11
+  circleci-orb-test: mattwelke/circleci-orb-test@0.0.12
 
 jobs:
   test-orb:
@@ -36,6 +36,7 @@ jobs:
       - circleci-orb-test/build-and-push-docker:
           docker-hub-id: DOCKER_HUB_ID
           docker-hub-password: DOCKER_HUB_PASSWORD
+          test-env-var-param: TEST_ENV_VAR_PARAM
           repo: circleci-orb-user-test
           tag: << pipeline.git.revision >>
       # - run:
