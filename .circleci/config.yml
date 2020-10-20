@@ -14,16 +14,16 @@ jobs:
       docker-hub-id: DOCKER_HUB_ID
       docker-hub-password: DOCKER_HUB_PASSWORD
 
-    docker:
-      # - image: cimg/node:14.14.0
-      #   auth:
-      #     username: $DOCKER_HUB_ID
-      #     password: $DOCKER_HUB_PASSWORD
-      - image: google/cloud-sdk:313.0.0
-        command: gcloud beta emulators pubsub start --project=test-project
-        auth:
-          username: $DOCKER_HUB_ID
-          password: $DOCKER_HUB_PASSWORD
+    # docker:
+    #   # - image: cimg/node:14.14.0
+    #   #   auth:
+    #   #     username: $DOCKER_HUB_ID
+    #   #     password: $DOCKER_HUB_PASSWORD
+    #   - image: google/cloud-sdk:313.0.0
+    #     command: gcloud beta emulators pubsub start --project=test-project
+    #     auth:
+    #       username: $DOCKER_HUB_ID
+    #       password: $DOCKER_HUB_PASSWORD
 
     resource_class: small
 
