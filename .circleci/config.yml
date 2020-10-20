@@ -1,7 +1,7 @@
 version: 2.1
 
 orbs:
-  circleci-orb-test: mattwelke/circleci-orb-test@0.0.14
+  circleci-orb-test: mattwelke/circleci-orb-test@0.0.15
 
 jobs:
   test-orb:
@@ -9,11 +9,16 @@ jobs:
       PUBSUB_EMULATOR_HOST: localhost:8085
       GOOGLE_CLOUD_PROJECT: test-project
 
+    executor:
+      name: circleci-orb-test/default
+      docker-hub-id: DOCKER_HUB_ID
+      docker-hub-password: DOCKER_HUB_PASSWORD
+
     docker:
-      - image: cimg/node:14.14.0
-        auth:
-          username: $DOCKER_HUB_ID
-          password: $DOCKER_HUB_PASSWORD
+      # - image: cimg/node:14.14.0
+      #   auth:
+      #     username: $DOCKER_HUB_ID
+      #     password: $DOCKER_HUB_PASSWORD
       - image: google/cloud-sdk:313.0.0
         command: gcloud beta emulators pubsub start --project=test-project
         auth:
