@@ -1,7 +1,7 @@
 version: 2.1
 
 orbs:
-  circleci-orb-test: mattwelke/circleci-orb-test@0.0.8
+  circleci-orb-test: mattwelke/circleci-orb-test@0.0.9
 
 jobs:
   test-orb:
