@@ -1,4 +1,4 @@
-FROM node:12
+FROM mwelke/node-14-slim
 
 # Create app directory
 WORKDIR /usr/src/app
