@@ -1,29 +1,25 @@
 version: 2.1
 
 orbs:
-  circleci-orb-test: mattwelke/circleci-orb-test@0.0.16
+  circleci-orb-test: mattwelke/circleci-orb-test@0.0.17
 
 jobs:
   test-orb:
     environment:
       PUBSUB_EMULATOR_HOST: localhost:8085
       GOOGLE_CLOUD_PROJECT: test-project
+      DOCKER_HUB_ID: mwelke
 
-    executor:
-      name: circleci-orb-test/default
-      docker-hub-id: DOCKER_HUB_ID
-      docker-hub-password: DOCKER_HUB_PASSWORD
-
-    # docker:
-    #   # - image: cimg/node:14.14.0
-    #   #   auth:
-    #   #     username: $DOCKER_HUB_ID
-    #   #     password: $DOCKER_HUB_PASSWORD
-    #   - image: google/cloud-sdk:313.0.0
-    #     command: gcloud beta emulators pubsub start --project=test-project
-    #     auth:
-    #       username: $DOCKER_HUB_ID
-    #       password: $DOCKER_HUB_PASSWORD
+    docker:
+      - image: cimg/node:14.14.0
+        auth:
+          username: $DOCKER_HUB_ID
+          password: $DOCKER_HUB_PASSWORD
+      - image: google/cloud-sdk:313.0.0
+        command: gcloud beta emulators pubsub start --project=test-project
+        auth:
+          username: $DOCKER_HUB_ID
+          password: $DOCKER_HUB_PASSWORD
 
     resource_class: small
 
@@ -38,24 +34,10 @@ jobs:
           subject: CircleCI
       - setup_remote_docker:
             docker_layer_caching: false
-      - circleci-orb-test/build-and-push-docker:
-          docker-hub-id: DOCKER_HUB_ID
+      - circleci-orb-test/build-and-push-to-docker-hub:
+          docker-hub-id: $DOCKER_HUB_ID
           docker-hub-password: DOCKER_HUB_PASSWORD
-          test-env-var-param: TEST_ENV_VAR_PARAM
-          repo: circleci-orb-user-test
-          tag: << pipeline.git.revision >>
-      # - run:
-      #     name: Auth with Docker Hub
-      #     command: |
-      #       echo $DOCKER_HUB_PASSWORD | docker login --username $DOCKER_HUB_ID --password-stdin
-      # - run:
-      #     name: Build app
-      #     command: |
-      #       docker build -t $DOCKER_HUB_ID/circleci-orb-user-test:<< pipeline.git.revision >> .
-      # - run:
-      #     name: Push build
-      #     command: |
-      #       docker push $DOCKER_HUB_ID/circleci-orb-user-test:<< pipeline.git.revision >>
+          image: $DOCKER_HUB_ID/circleci-orb-user-test
 
 workflows:
   test-orb:
